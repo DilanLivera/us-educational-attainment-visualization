@@ -75,13 +75,14 @@ document.addEventListener("DOMContentLoaded", function() {
             let county = d.countyData.area_name;
               
             d3.select(this).classed("highlight", true);
+            console.dir(tooltip.node())
   
             tooltip
               .attr("data-fips", fips)
               .attr("data-education", education)
               .style("opacity", 1)
               .style("left", `${d3.event.x - tooltip.node().offsetWidth/2}px`)
-              .style("top", `${d3.event.y - 45}px`)
+              .style("top", `${d3.event.y - tooltip.node().offsetHeight}px`)
               .html(`
                 <p>${county} - ${state}</p>
                 <p>${education}</p>
