@@ -1,15 +1,25 @@
 document.addEventListener("DOMContentLoaded", function() {
   const educationDataURL = "https://raw.githubusercontent.com/no-stack-dub-sack/testable-projects-fcc/master/src/data/choropleth_map/for_user_education.json";
   const countyDataURL = " https://raw.githubusercontent.com/no-stack-dub-sack/testable-projects-fcc/master/src/data/choropleth_map/counties.json";
+  const title = "United States Educational Attainment";
+  const description = "Percentage of adults age 25 and older with a bachelor's degree or higher (2010-2014)";
   const width = "1000";
-  const height = "700";
-  const margin = { top: 20, left: 20, bottom: 20, right: 20 };
+  const height = "650";
 
   //svg setup
   let svg = d3.select("svg")
               .attr("width", width)
               .attr("height", height)
               .classed("map", true);
+
+  //add a title
+  d3.select("#title")
+      .classed("title", true)
+    .text(title);
+
+  d3.select("#description")
+      .classed("description", true)
+    .text(description);    
 
   d3.queue()
     .defer(d3.json, countyDataURL)

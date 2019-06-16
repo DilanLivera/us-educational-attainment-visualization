@@ -6,7 +6,7 @@ body {
 }
 
 .map {
-  transform: translateY(-60px);
+  transform: translateY(40px);
   border-radius: 15px;
   padding-top: 50px;
   box-shadow: 7px 7px 19px 0px  rgba(189,192,199,1), 
@@ -18,6 +18,20 @@ body {
 path {
   stroke: #ccc;
   stroke-width: 0.25px;
+}
+
+.title {
+  transform: translateY(35px);
+  text-align: center;  
+  font-weight: 600;
+  font-size: 40px;
+  margin: 0;
+}
+
+.description {
+  transform: translateY(25px);
+  /* font-weight: 600; */
+  font-size: 18px;
 }
 
 .tooltip {
