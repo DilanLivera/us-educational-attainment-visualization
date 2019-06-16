@@ -38,10 +38,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
       //setup color scale
       let dataArr = geoData.map(d => d.countyData.bachelorsOrHigher);
+      let minPoint = d3.min(geoData, d => d.countyData.bachelorsOrHigher)
+      let maxPoint = d3.max(geoData, d => d.countyData.bachelorsOrHigher)
+      let middlePoint = (maxPoint-minPoint)/8;
 
       let colorScale = d3.scaleThreshold()
-                         .domain(dataArr)
-                         .range(d3.schemeGreens[7]);
+                         .domain(d3.range(minPoint, maxPoint, middlePoint))
+                         .range(d3.schemeGreens[9]);
 
       // tooltip
       let tooltip = d3.select("body")                    
