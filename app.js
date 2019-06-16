@@ -11,10 +11,6 @@ document.addEventListener("DOMContentLoaded", function() {
               .attr("height", height)
               .classed("map", true);
 
-  // let colorScale = d3.scaleTreshold()
-  //                    .domain([])
-  //                    .range([])
-
   d3.queue()
     .defer(d3.json, countyDataURL)
     .defer(d3.json, educationDataURL)
@@ -29,6 +25,19 @@ document.addEventListener("DOMContentLoaded", function() {
       });
 
       let path = d3.geoPath();
+
+      //setup color scale
+      let dataArr = geoData.map(d => d.countyData.bachelorsOrHigher);
+
+      let colorScale = d3.scaleThreshold()
+                         .domain(dataArr)
+                         .range(d3.schemeGreens[7]);
+
+      // tooltip
+      let tooltip = d3.select("body")                    
+                      .append("div")
+                        .attr("id", "tooltip")                        
+                        .classed("tooltip", true);                         
       
       svg
         .append("g")
@@ -40,5 +49,36 @@ document.addEventListener("DOMContentLoaded", function() {
           .attr("data-education", d => d.countyData.bachelorsOrHigher)
           .classed("county", true)
           .attr("d", path)
+          .attr("fill", d => colorScale(d.countyData.bachelorsOrHigher))
+        .on("mouseover", showTooltip)
+        .on("touchstart", showTooltip)
+        .on("mouseout", hideTooltip)    
+        .on("touchend", hideTooltip);          
+
+          function showTooltip(d) {
+            let fips = d.countyData.fips;
+            let education = d.countyData.bachelorsOrHigher;
+            let state = d.countyData.state;
+            let county = d.countyData.area_name;
+              
+            d3.select(this).classed("highlight", true);
+  
+            tooltip
+              .attr("data-fips", fips)
+              .attr("data-education", education)
+              .style("opacity", 1)
+              .style("left", `${d3.event.x - tooltip.node().offsetWidth/2}px`)
+              .style("top", `${d3.event.y + 25}px`)
+              .html(`
+                <p>${county} - ${state}</p>
+                <p>${education}</p>
+              `);          
+          }
+    
+          function hideTooltip() {
+            d3.select(this).classed("highlight", false);
+            tooltip
+              .style("opacity", 0);
+          }           
     });
 });
