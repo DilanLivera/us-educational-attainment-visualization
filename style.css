@@ -3,16 +3,16 @@ body {
   flex-direction: column;
   align-items: center;
   font-family: sans-serif;
+  padding-bottom: 50px;
 }
 
 .map {
   transform: translateY(40px);
   border-radius: 15px;
-  padding-top: 50px;
   box-shadow: 7px 7px 19px 0px  rgba(189,192,199,1), 
               -7px -7px 19px 0px  rgba(189,192,199,1),
               7px -7px 19px 0px  rgba(189,192,199,1),
-              -7px 7px 19px 0px  rgba(189,192,199,1);
+              -7px 7px 19px 0px  rgba(189,192,199,1);                
 }
 
 path {

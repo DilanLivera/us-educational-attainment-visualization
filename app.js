@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", function() {
   const countyDataURL = " https://raw.githubusercontent.com/no-stack-dub-sack/testable-projects-fcc/master/src/data/choropleth_map/counties.json";
   const title = "United States Educational Attainment";
   const description = "Percentage of adults age 25 and older with a bachelor's degree or higher (2010-2014)";
+  const Source = "https://www.ers.usda.gov/data-products/county-level-data-sets/download-data.aspx";
   const width = "1000";
   const height = "650";
 
@@ -36,15 +37,50 @@ document.addEventListener("DOMContentLoaded", function() {
 
       let path = d3.geoPath();
 
-      //setup color scale
+      //setup color scales
       let dataArr = geoData.map(d => d.countyData.bachelorsOrHigher);
       let minPoint = d3.min(geoData, d => d.countyData.bachelorsOrHigher)
       let maxPoint = d3.max(geoData, d => d.countyData.bachelorsOrHigher)
       let middlePoint = (maxPoint-minPoint)/8;
+      let range = d3.range(minPoint, maxPoint, middlePoint);
 
       let colorScale = d3.scaleThreshold()
-                         .domain(d3.range(minPoint, maxPoint, middlePoint))
+                         .domain(range)
                          .range(d3.schemeGreens[9]);
+
+      //setup legend
+      let legendXScale = d3.scaleLinear()
+                           .domain([minPoint, maxPoint])
+                           .range([0, width/3]);
+
+      let legendXAxis = d3.axisBottom(legendXScale)
+                          .tickSize(10, 0)
+                          .tickValues(range)
+                          .tickFormat(d => Math.round(d) + "%")
+                          .tickSizeOuter(0);;
+
+      let legend = svg.append("g")
+                        .attr("id", "legend");
+      
+      legend.append("g")
+              .attr("id", "legend-axis")
+            .call(legendXAxis)
+              .attr("transform", `translate(${width/2}, 30)`)
+              .style("font-size", "14")
+
+      //add legend
+      legend
+        .append("g")
+        .selectAll("rect")
+        .data(range)
+        .enter()
+        .append("rect")
+        .classed("color-box", true)
+          .attr("x", (d) => width/2 + legendXScale(d))
+          .attr("y", 20)
+          .attr("width", (width/3)/8)
+          .attr("height", 10)
+          .style("fill", d => colorScale(d))           
 
       // tooltip
       let tooltip = d3.select("body")                    
@@ -75,7 +111,6 @@ document.addEventListener("DOMContentLoaded", function() {
             let county = d.countyData.area_name;
               
             d3.select(this).classed("highlight", true);
-            console.dir(tooltip.node())
   
             tooltip
               .attr("data-fips", fips)
