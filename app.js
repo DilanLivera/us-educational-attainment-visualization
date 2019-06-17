@@ -129,7 +129,7 @@ d3.select("#source")
           .attr("data-education", education)
           .style("opacity", 1)
           .style("left", `${d3.event.x - tooltip.node().offsetWidth/2}px`)
-          .style("top", `${d3.event.y - tooltip.node().offsetHeight + 100}px`)
+          .style("top", `${d3.event.y - 100}px`)
           .html(`
             <p>${county} - ${state}</p>
             <p>${education}</p>
