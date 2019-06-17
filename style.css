@@ -3,16 +3,17 @@ body {
   flex-direction: column;
   align-items: center;
   font-family: sans-serif;
-  padding-bottom: 50px;
+  /* padding-bottom: 50px; */
+  margin: 0
 }
 
-.map {
-  transform: translateY(40px);
-  border-radius: 15px;
+.svg {
+  /* transform: translateY(20px); */
+  /* border-radius: 15px;
   box-shadow: 7px 7px 19px 0px  rgba(189,192,199,1), 
               -7px -7px 19px 0px  rgba(189,192,199,1),
               7px -7px 19px 0px  rgba(189,192,199,1),
-              -7px 7px 19px 0px  rgba(189,192,199,1);                
+              -7px 7px 19px 0px  rgba(189,192,199,1);                 */
 }
 
 path {
@@ -21,7 +22,7 @@ path {
 }
 
 .title {
-  transform: translateY(35px);
+  transform: translateY(25px);
   text-align: center;  
   font-weight: 600;
   font-size: 40px;
@@ -29,7 +30,7 @@ path {
 }
 
 .description {
-  transform: translateY(25px);
+  transform: translateY(10px);
   /* font-weight: 600; */
   font-size: 18px;
 }
