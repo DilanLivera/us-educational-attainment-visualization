@@ -1,5 +1,5 @@
 # US educational attainment visualization with a choropleth  map
-United States educational attainment visualization on a choropleth map. Data set for the app was provided by ([United States Department of AgricultureEconomic](https://www.ers.usda.gov/data-products/county-level-data-sets/download-data.aspx)).
+United States educational attainment visualization on a choropleth map. Data set for the app was provided by United States Department of AgricultureEconomic. ([Educational attainment for the U.S., States, and counties, 1970-2017 Data set](https://www.ers.usda.gov/data-products/county-level-data-sets/download-data.aspx)).
 
 This app was built using [D3.js](https://d3js.org/) and Scalable Vector Graphics.
 
